@@ -2,8 +2,8 @@ package com.example.cachibackend.model;
 
 public class ChatResult {
 
-    private String content;  // LLM 输出文本
-    private String model;    // 可选，返回使用的模型名
+    private String content;  // LLM input content
+    private String model;    // model name - optional
 
     public ChatResult() {}
 

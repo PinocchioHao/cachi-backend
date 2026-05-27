@@ -17,15 +17,17 @@ public class ChatController {
         this.service = service;
     }
 
+    private static final String DEFAULT_MODEL = "openai/gpt-oss-120b:free";
+
     @PostMapping
     public ApiResponse<ChatResult> chat(@RequestBody OpenRouterRequest request) {
         try {
             if (request.getMessages() == null || request.getMessages().isEmpty()) {
-                return ApiResponse.error(400, "messages不能为空");
+                return ApiResponse.error(400, "messages cannot be empty");
             }
 
             String userMessage = request.getMessages().get(0).getContent();
-            String model = request.getModel() != null ? request.getModel() : "tngtech/tng-r1t-chimera:free";
+            String model = request.getModel() != null ? request.getModel() : DEFAULT_MODEL;
 
             ChatResult result = service.chatSimplified(userMessage, model);
             return ApiResponse.success(result);
